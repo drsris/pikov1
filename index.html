@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>weboldalnév</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Sora', 'sans-serif'],
+          },
+          animation: {
+            scroll: 'scroll 30s linear infinite',
+          },
+          keyframes: {
+            scroll: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .scroll-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .scroll-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 30s linear infinite;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body class="bg-white font-sans">
+
+  <!-- Navigációs sáv -->
+  <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 backdrop-blur-md bg-white/90 border border-gray-200 shadow-lg rounded-full px-8 py-3 flex items-center justify-between gap-12 max-w-[900px] w-full">
+    <div class="flex items-center space-x-3">
+      <img src="images/logo.png" alt="Logo" class="h-8 w-8 rounded-full" />
+      <span class="text-xl font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-transparent bg-clip-text">Piko Industries</span>
+    </div>
+    <div class="flex items-center gap-8 text-sm font-medium">
+      <a href="#rolam" class="text-gray-700 hover:text-indigo-600 transition">Rólam</a>
+      <a href="#munkak" class="text-gray-700 hover:text-indigo-600 transition">Munkáim</a>
+      <a href="#arak" class="text-gray-700 hover:text-indigo-600 transition">Árak</a>
+    </div>
+  </nav>
+
+  <!-- Discord buborék -->
+  <div class="mt-28 flex justify-center relative">
+    <div id="copy-msg" class="absolute -top-6 bg-green-500 text-white text-xs px-3 py-1 rounded-full opacity-0 transition-opacity duration-300 ease-in-out pointer-events-none shadow-md">
+      Kimásolva!
+    </div>
+    <div class="flex items-center bg-white border border-gray-200 shadow-md rounded-full px-4 py-2 gap-3">
+      <div class="h-5 w-5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+      <button onclick="copyDiscord()" class="text-sm font-medium text-gray-800 hover:text-indigo-600 focus:outline-none transition">
+        Discord: dvandras
+      </button>
+    </div>
+  </div>
+
+  <!-- Főcímsor -->
+  <section class="pt-16 text-center px-6">
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+      <span class="bg-gradient-to-r from-blue-600 to-indigo-700 text-transparent bg-clip-text">
+        Design, Ami Sikerre
+      </span><br />
+      Viszi az Ötleteidet
+    </h1>
+    <p class="mt-4 text-gray-600 text-base md:text-lg">
+      Világszintű design, ami meggyőz és forgalmat növel, amikor számít.
+    </p>
+  </section>
+
+  <!-- Logó szalag középen (ismétlődő, szürke hatás) -->
+  <section class="mt-16 flex justify-center">
+    <div class="scroll-wrapper max-w-[900px]">
+      <div class="scroll-track gap-10 py-4">
+        <!-- 1. sor logók -->
+        <template id="logos">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="HTML5" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="CSS3" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="JavaScript" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="TypeScript" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="React" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="Node.js" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="Git" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition duration-300" title="GitHub" />
+        </template>
+        <!-- Dupla sor a végtelenségért -->
+        <div class="flex gap-10" id="logos-container"></div>
+        <div class="flex gap-10" id="logos-container-copy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Amiért a Vállalkozások Minket Választanak -->
+  <section class="mt-20 text-center px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+      Amiért a <span class="bg-gradient-to-r from-blue-600 to-indigo-700 text-transparent bg-clip-text">Vállalkozások</span> Minket Választanak
+    </h2>
+    <p class="mt-4 text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+      Mert nem csak szép dizájnt készítünk – hanem olyan megoldásokat, amik eladnak. Tapasztalat, megbízhatóság és modern technológiák – ez a Piko Industries.
+    </p>
+  </section>
+
+  <section class="mt-20 px-6">
+  <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+    <span class="bg-gradient-to-r from-blue-600 to-indigo-700 text-transparent bg-clip-text">Akiknek</span> Már Segítettünk
+  </h2>
+  
+  <div class="flex flex-col items-center gap-10 max-w-6xl mx-auto">
+
+    <!-- Partner 1 -->
+    <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden w-[572px]">
+      <div class="relative w-[572px] h-[308px]">
+        <img src="images/webem.png" alt="Partner 1" class="w-full h-full object-cover rounded-t-xl">
+        <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">Weboldal</span>
+      </div>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800">VexeHost</h3>
+        <p class="text-sm text-gray-600">A VexeHost 2024 végén alakult meg azzal a küldetéssel, hogy gyors, megbízható és megfizethető szerverhosztingot kínáljon a magyar Minecraft közösség számára.</p>
+      </div>
+    </div>
+
+    <!-- Partner 2 -->
+    <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden w-[572px]">
+      <div class="relative w-[572px] h-[308px]">
+        <img src="images/bg2.png" alt="Partner 2" class="w-full h-full object-cover rounded-t-xl">
+        <span class="absolute top-3 right-3 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">Szerver</span>
+      </div>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800">DarkSite</h3>
+        <p class="text-sm text-gray-600">DarkSite közösségi Minecraft szerver fejlesztésében is nagy szerepet játszottam be!</p>
+      </div>
+    </div>
+
+    <!-- Partner 3 -->
+    <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden w-[572px]">
+      <div class="relative w-[572px] h-[308px]">
+        <img src="images/retrohq.png" alt="Partner 3" class="w-full h-full object-cover rounded-t-xl">
+        <span class="absolute top-3 right-3 bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">Landing</span>
+      </div>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800">RetroHQ @Reigniteh</h3>
+        <p class="text-sm text-gray-600">RetroHQ szerver tesztelésén részt vettem és egyes skriptek készítését is elvégeztem teljes jó érték arányban, vezeőtésg megelégelt volt munkáimmal, számithattak rám minden esetben.</p>
+      </div>
+    </div>
+
+<!-- Átlátható Árazás -->
+<section class="mt-20 text-center px-6">
+  <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+    Átlátható <span class="bg-gradient-to-r from-blue-600 to-indigo-700 text-transparent bg-clip-text">Árazás</span> Meglepetések Nélkül
+  </h2>
+  <p class="mt-4 text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+    Átlátható árképzés, rejtett költségek nélkül. Professzionális weboldal, logó vagy vizuális arculat – a költségvetésedhez igazítva.
+  </p>
+</section>
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 px-6 max-w-7xl mx-auto">
+
+  <!-- Landing Csomag -->
+  <div class="relative border border-gray-200 rounded-2xl p-6 shadow-md bg-white hover:shadow-xl transition flex flex-col justify-between">
+    <span class="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+      Legnépszerűbb
+    </span>
+    <div>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">Landing</h3>
+      <p class="text-3xl font-extrabold text-blue-600 mb-4">
+        <span class="text-4xl">45&nbsp;000</span><span class="text-base font-semibold text-gray-500"> Ft</span>
+      </p>
+      <ul class="text-gray-700 space-y-2 mb-6">
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm">✔</span>3 Design Koncepció</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm">✔</span>Végtelen Módosítás</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm">✔</span>1 Főoldal (Max. 12 szekció)</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm">✔</span>Konvertálásra Optimalizált</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm">✔</span>15 Napos Határidő</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm">✔</span>Animációk és Motion Design</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm">✔</span>NextJS Forráskód</li>
+      </ul>
+    </div>
+    <a href="#rendeles" class="mt-auto inline-block text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition">
+      Rendelés
+    </a>
+  </div>
+
+  <!-- Multipage Csomag -->
+  <div class="border border-gray-200 rounded-2xl p-6 shadow-md bg-white hover:shadow-xl transition flex flex-col justify-between">
+    <div>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">Multipage</h3>
+      <p class="text-3xl font-extrabold text-indigo-600 mb-4">
+        <span class="text-4xl">91&nbsp;300+</span><span class="text-base font-semibold text-gray-500"> Ft</span>
+      </p>
+      <ul class="text-gray-700 space-y-2 mb-6">
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-sm">✔</span>Világszintű Design</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-sm">✔</span>3 Design Koncepció</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-sm">✔</span>Végtelen Kérés és Módosítás</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-sm">✔</span>Dedikált Senior Designer</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-sm">✔</span>Maximális Konverzió</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-sm">✔</span>3 Oldal az Árban</li>
+        <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-sm">✔</span>Kiváló Animációk</li>
+      </ul>
+    </div>
+    <a href="#rendeles" class="mt-auto inline-block text-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition">
+      Rendelés
+    </a>
+  </div>
+
+<!-- Logo Design -->
+<div class="relative border border-gray-200 rounded-2xl p-6 shadow-md bg-white hover:shadow-xl transition flex flex-col justify-between">
+  <span class="absolute top-4 right-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+    -10% kedvezmény
+  </span>
+  <div>
+    <h3 class="text-xl font-semibold text-gray-900 mb-2">Logo Design</h3>
+    <p class="text-3xl font-extrabold text-emerald-600 mb-4">
+      <span class="text-4xl line-through text-gray-400 mr-2">33&nbsp;000</span>
+      <span class="text-4xl">29&nbsp;700</span><span class="text-base font-semibold text-gray-500"> Ft</span>
+    </p>
+    <ul class="text-gray-700 space-y-2 mb-6">
+      <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 font-bold text-sm">✔</span>Egyedi, Emlékezetes Logo</li>
+      <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 font-bold text-sm">✔</span>3 Módosítás</li>
+      <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 font-bold text-sm">✔</span>Forrásfileok</li>
+      <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 font-bold text-sm">✔</span>10 Napos Határidő</li>
+      <li class="flex items-start gap-2"><span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 font-bold text-sm">✔</span>Gyakori Egyeztetés</li>
+    </ul>
+  </div>
+  <a href="#rendeles" class="mt-auto inline-block text-center bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition">
+    Rendelés
+  </a>
+</div>
+
+<!-- Kérdések -->
+<section class="mt-20 px-6 text-left max-w-4xl mx-auto">
+  <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+    Kérdések?<br>
+    <span class="bg-gradient-to-r from-blue-600 to-indigo-700 text-transparent bg-clip-text">Válaszolunk.</span>
+  </h2>
+  <p class="mt-4 text-gray-600 text-base md:text-lg">
+    Valami más érdekel? Küldj nekünk egyszerűen egy emailt a <a href="mailto:hello@pikoindustries.com" class="text-blue-600 hover:underline">hello@reigindustries.com</a> címre.
+  </p>
+</section>
+
+<section class="w-full px-6 py-16 flex justify-end bg-white">
+  <div class="max-w-3xl w-full space-y-6">
+    <div class="divide-y divide-gray-200 border border-gray-200 rounded-xl shadow-lg">
+      
+      <!-- 1. kérdés -->
+      <details class="group p-6">
+        <summary class="flex items-center justify-between cursor-pointer text-lg font-medium text-gray-900">
+          Kikkel dolgoztok együtt?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <p class="mt-4 text-gray-700 text-sm leading-relaxed">
+          Specialitásunk a <span class="text-indigo-600 font-medium">SaaS-cégek, startupok, B2B, AI és marketing</span> – de nyitottak vagyunk mindenki felé.
+        </p>
+      </details>
+
+      <!-- 2. kérdés -->
+      <details class="group p-6">
+        <summary class="flex items-center justify-between cursor-pointer text-lg font-medium text-gray-900">
+          Mikor tudjátok elkezdeni a projektemet?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <p class="mt-4 text-gray-700 text-sm leading-relaxed">
+          A projektedet akár <span class="text-indigo-600 font-medium">még ma</span> el tudjuk kezdeni – semmi csúszás, semmi szerződés.
+        </p>
+      </details>
+
+      <!-- 3. kérdés -->
+      <details class="group p-6">
+        <summary class="flex items-center justify-between cursor-pointer text-lg font-medium text-gray-900">
+          Hogyan kommunikálunk?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <p class="mt-4 text-gray-700 text-sm leading-relaxed">
+          Az általad választott platformon: <span class="text-indigo-600 font-medium">Discord, Telegram, WhatsApp, Slack vagy email</span> – napi szintű kapcsolattartás garantált.
+        </p>
+      </details>
+
+      <!-- 4. kérdés -->
+      <details class="group p-6">
+        <summary class="flex items-center justify-between cursor-pointer text-lg font-medium text-gray-900">
+          Milyen fajta design-okat készítetek?
+          <svg class="w-5 h-5 text-gray-500 group-open:rotate-180 transform transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <p class="mt-4 text-gray-700 text-sm leading-relaxed">
+          <span class="text-indigo-600 font-medium">Weboldalak, alkalmazások, logó design és teljes branding csomagok</span>. Minden projektünk konvertálásra optimalizált és modern design elvek szerint készül.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+  <!-- Discord másolás JS -->
+  <script>
+    function copyDiscord() {
+      const username = '@felhasznalonev';
+      navigator.clipboard.writeText(username).then(() => {
+        const msg = document.getElementById('copy-msg');
+        msg.classList.remove('opacity-0');
+        msg.classList.add('opacity-100');
+        setTimeout(() => {
+          msg.classList.remove('opacity-100');
+          msg.classList.add('opacity-0');
+        }, 2000);
+      });
+    }
+
+    // Duplázás a logók ismétlődéséhez
+    const template = document.getElementById('logos').content;
+    document.getElementById('logos-container').appendChild(template.cloneNode(true));
+    document.getElementById('logos-container-copy').appendChild(template.cloneNode(true));
+  </script>
+
+    </div>
+  </section>
+
+  <!-- IDE KERÜL A FOOTER -->
+  <footer class="mt-32 bg-gray-100 text-center py-6 text-sm text-gray-600">
+    &copy; 2025 Piko Industries. Minden jog fenntartva.
+  </footer>
+
+</body>
+</html>
+
